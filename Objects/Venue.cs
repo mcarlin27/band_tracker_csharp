@@ -18,6 +18,22 @@ namespace BandTracker.Objects
       City = city;
     }
 
+    public override bool Equals(System.Object otherVenue)
+    {
+      if (!(otherVenue is Venue))
+      {
+        return false;
+      }
+      else
+      {
+        Venue newVenue = (Venue) otherVenue;
+        bool idEquality = this.Id == newVenue.Id;
+        bool nameEquality = this.Name == newVenue.Name;
+        bool cityEquality = this.City == newVenue.City;
+        return (idEquality && nameEquality && cityEquality);
+      }
+    }
+
     public static List<Venue> GetAll()
     {
       SqlConnection conn = DB.Connection();

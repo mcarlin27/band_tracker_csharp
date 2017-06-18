@@ -26,5 +26,14 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Test_Equal_ReturnsTrueForSameInfo()
+    {
+      //Arrange, Act
+      Venue firstVenue = new Venue("Madison Square Garden", "NYC");
+      Venue secondVenue = new Venue("Madison Square Garden", "NYC");
+      //Assert
+      Assert.Equal(firstVenue, secondVenue);
+    }
   }
 }
