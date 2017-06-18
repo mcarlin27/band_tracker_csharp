@@ -54,6 +54,40 @@ namespace BandTracker.Objects
         return View["venue.cshtml", model];
       }; //retrieves individual venue pages
 
+      Get["/venue/{id}/edit"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Venue selectedVenue = Venue.Find(parameters.id);
+        string venueEdit = Request.Query["venue-edit"];
+        model.Add("form-type", venueEdit);
+        model.Add("venue", selectedVenue);
+        return View["edit.cshtml", model];
+      }; //edit individual venue
+      Patch["/venue/{id}/edit"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Venue selectedVenue = Venue.Find(parameters.id);
+        selectedVenue.UpdateVenue(Request.Form["venue-name"], Request.Form["venue-city"]);
+        List<Band> venueBands = selectedVenue.GetBands();
+        model.Add("venue", selectedVenue);
+        model.Add("bands", venueBands);
+        return View["venue.cshtml", model];
+      }; //returns edited venue page
+      Get["venue/{id}/delete"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Venue selectedVenue = Venue.Find(parameters.id);
+        string venueDelete = Request.Query["venue-delete"];
+        model.Add("form-type", venueDelete);
+        model.Add("venue", selectedVenue);
+        return View["delete.cshtml", model];
+      }; //delete individual venue
+      Delete["venue/{id}/delete"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Venue selectedVenue = Venue.Find(parameters.id);
+        selectedVenue.Delete();
+        model.Add("listBands", Band.GetAll());
+        model.Add("listVenues", Venue.GetAll());
+        model.Add("show-info", null);
+        return View["index.cshtml", model];
+      }; //returns confirmation of deleted venue
     }
   }
 }

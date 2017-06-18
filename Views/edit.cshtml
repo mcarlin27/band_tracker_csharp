@@ -1,0 +1,33 @@
+@{
+  Layout="Shared/_Layout";
+}
+
+@if(Model["form-type"] == "venue-edit")
+{
+  <h1>Edit Venue</h1>
+  <hr />
+  <h3>@Model["venue"].Name</h3>
+  <form action='/venue/@Model["venue"].Id/edit' method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <input name="venue-id" type="hidden" value='@Model["venue"].Id'>
+    <label for="venue-name">Venue Name</label>
+    <input id="venue-name" name="venue-name" type="text" value='@Model["venue"].Name'>
+    <label for="venue-city">City Venue</label>
+    <input id="venue-city" name="venue-city" type="text" value='@Model["venue"].City'>
+    <button type="submit">Submit</button>
+  </form>
+}
+
+@if(Model["form-type"] == "band-edit")
+{
+  <h1>Edit Band</h1>
+  <hr />
+  <h2>@Model["band"].Name</h2>
+  <form action='/band/@Model["band"].Id/edit' method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <input name="band-id" type="hidden" value='@Model["band"].Id'>
+    <label for="band-name">Band Name</label>
+    <input id="band-name" name="band-name" type="text" value='@Model["band"].Name'>
+    <button type="submit">Submit</button>
+  </form>
+}

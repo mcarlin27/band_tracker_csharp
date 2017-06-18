@@ -1,0 +1,28 @@
+@{
+  Layout="Shared/_Layout";
+}
+
+@if(Model["form-type"] == "venue-delete")
+{
+  <h1>Delete Venue</h1>
+  <hr/>
+  <h2>Are you sure you want to delete this venue?</h2>
+
+  <h4>@Model["venue"].Name</h4>
+  <form action='/venue/@Model["venue"].Id/delete' method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete</button>
+  </form>
+}
+
+@if(Model["form-type"] == "band-delete")
+{
+  <h1>Delete Band</h1>
+  <hr/>
+  <h2>Are you sure you want to delete this band?</h2>
+  <h4>@Model["band"].Name</h4>
+  <form action='/band/@Model["band"].Id/delete' method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete</button>
+  </form>
+}
