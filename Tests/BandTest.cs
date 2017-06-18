@@ -83,5 +83,22 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(firstTestBand, secondTestBand);
     }
+    [Fact]
+    public void Test_Delete_ReturnsTrueIfListsAreTheSame()
+    {
+      //Arrange
+      Band firstTestBand = new Band("Modest Mouse");
+      firstTestBand.Save();
+      Band secondTestBand = new Band("Rilo Kiley");
+      secondTestBand.Save();
+      Band thirdTestBand = new Band("Pink Floyd");
+      thirdTestBand.Save();
+      List<Band> expectedList = new List<Band>{firstTestBand, secondTestBand};
+      //Act
+      thirdTestBand.Delete();
+      List<Band> resultList = Band.GetAll();
+      //Assert
+      Assert.Equal(resultList, expectedList);
+    }
   }
 }
