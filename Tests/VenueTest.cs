@@ -17,6 +17,7 @@ namespace BandTracker.Objects
     public void Dispose()
     {
       Venue.DeleteAll();
+      Band.DeleteAll();
     }
     [Fact]
     public void Test_VenueDatabaseEmptyAtFirst()
@@ -114,6 +115,25 @@ namespace BandTracker.Objects
       List<Band> expectedList = new List<Band>{newBand};
       //Assert
       Assert.Equal(expectedList, testVenueBands);
+    }
+    [Fact]
+    public void Test_DeleteBandFromVenue()
+    {
+      //Arrange
+      Venue newVenue = new Venue("Madison Square Garden", "NYC");
+      newVenue.Save();
+      Band firstTestBand = new Band("Modest Mouse");
+      firstTestBand.Save();
+      newVenue.AddBand(firstTestBand);
+      Band secondTestBand = new Band("Rilo Kiley");
+      secondTestBand.Save();
+      newVenue.AddBand(secondTestBand);
+      //Act
+      newVenue.DeleteBandFromVenue(secondTestBand);
+      List<Band> resultList = newVenue.GetBands();
+      List<Band> expectedList = new List<Band>{firstTestBand};
+      //Assert
+      Assert.Equal(expectedList, resultList);
     }
   }
 }

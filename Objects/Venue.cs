@@ -228,6 +228,26 @@ namespace BandTracker.Objects
       return bands;
     }
 
+    public void DeleteBandFromVenue(Band band)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM bands_venues WHERE band_id = @BandId;", conn);
+
+      SqlParameter bandIdParameter = new SqlParameter();
+      bandIdParameter.ParameterName = "@BandId";
+      bandIdParameter.Value = band.Id;
+
+      cmd.Parameters.Add(bandIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if(conn != null)
+      {
+       conn.Close();
+      }
+    }
+
     public void Delete()
     {
       SqlConnection conn = DB.Connection();
@@ -235,11 +255,11 @@ namespace BandTracker.Objects
 
       SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId;", conn);
 
-      SqlParameter VenueIdParameter = new SqlParameter();
-      VenueIdParameter.ParameterName = "@VenueId";
-      VenueIdParameter.Value = this.Id;
+      SqlParameter venueIdParameter = new SqlParameter();
+      venueIdParameter.ParameterName = "@VenueId";
+      venueIdParameter.Value = this.Id;
 
-      cmd.Parameters.Add(VenueIdParameter);
+      cmd.Parameters.Add(venueIdParameter);
       cmd.ExecuteNonQuery();
 
       if (conn != null)
