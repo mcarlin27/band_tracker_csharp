@@ -97,6 +97,44 @@ namespace BandTracker.Objects
       return venues;
     }
 
+    public void UpdateVenue(string newName, string newCity)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName, city = @NewCity OUTPUT INSERTED.name, INSERTED.city WHERE id = @VenueId;", conn);
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewName";
+      newNameParameter.Value = newName;
+      cmd.Parameters.Add(newNameParameter);
+
+      SqlParameter newCityParameter = new SqlParameter();
+      newCityParameter.ParameterName = "@NewCity";
+      newCityParameter.Value = newCity;
+      cmd.Parameters.Add(newCityParameter);
+
+      SqlParameter VenueIdParameter = new SqlParameter();
+      VenueIdParameter.ParameterName = "@VenueId";
+      VenueIdParameter.Value = this.Id;
+      cmd.Parameters.Add(VenueIdParameter);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this.Name = rdr.GetString(0);
+        this.City = rdr.GetString(1);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
     public static Venue Find(int id)
     {
       SqlConnection conn = DB.Connection();
