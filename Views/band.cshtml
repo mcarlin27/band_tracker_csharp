@@ -1,0 +1,27 @@
+@{
+  Layout="Shared/_Layout";
+}
+
+<h1>@Model["band"].Name</h1>
+<h3>Here are all the venues where this band has played:</h3>
+
+@if (@Model["venues"].Count == 0)
+{
+  <p>None!</p>
+}
+else
+{
+  <ol>
+    @foreach (var venue in @Model["venues"])
+    {
+      <li><a href="/venues/@venue.Id">@venue.Name, @venue.City</li>
+    }
+  </ol>
+}
+<form action='/band/@Model["band"].Id/edit' method="get">
+    <input type="hidden" name="band-edit" id="band-edit" value="band-edit"><button type="submit">Edit this Venue</button>
+</form>
+<form action='/band/@Model["band"].Id/delete' method="get">
+    <input type="hidden" name="band-delete" id="band-delete" value="band-delete"><button type="submit">Delete this Venue</button>
+</form>
+<p><a href="/">Return Home</a></p>
