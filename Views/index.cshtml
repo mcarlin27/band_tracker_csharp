@@ -8,6 +8,14 @@
     {
       <h3>@band.Name</h3>
     }
+    @if(@Model["show-info"] == "new-band-info")
+    {
+      <h3>You just added @Model["newBand"].Name!</h3>
+    }
+    <form  action="/bands/new" method="get">
+      <button type="submit" name="button">Add Band</button>
+    </form>
+
   </div>
 
   <div class="col-md-6">

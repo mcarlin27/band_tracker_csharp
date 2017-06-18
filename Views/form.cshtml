@@ -1,0 +1,16 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+@if(Model["form-type"] == "new-band")
+{
+  <h1 class="text-center">Add a band</h1>
+  <form action="/bands/new" method="post">
+    <div class="form-group">
+      <label for="band-name">Name</label>
+      <input type="text" name="band-name" class="form-control">
+    </div>
+    <input type="hidden" name="show-info-new" class="form-control" value="band-new">
+    <button type="submit" class="btn btn-info">Add band</button>
+  </form>
+}
