@@ -35,5 +35,30 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(firstVenue, secondVenue);
     }
+    [Fact]
+    public void Test_Save_SavesVenueToDatabase()
+    {
+      //Arrange
+      Venue testVenue = new Venue("Madison Square Garden", "NYC");
+      testVenue.Save();
+      //Act
+      List<Venue> result = Venue.GetAll();
+      List<Venue> expectedResult = new List<Venue>{testVenue};
+      //Assert
+      Assert.Equal(result, expectedResult);
+    }
+    [Fact]
+    public void Test_Save_AssignsIdToVenueInDatabase()
+    {
+      //Arrange
+      Venue testVenue = new Venue("Madison Square Garden", "NYC");
+      testVenue.Save();
+      //Act
+      Venue savedVenue = Venue.GetAll()[0];
+      int testId = testVenue.Id;
+      int expectedId = savedVenue.Id;
+      //Assert
+      Assert.Equal(testId, expectedId);
+    }
   }
 }
