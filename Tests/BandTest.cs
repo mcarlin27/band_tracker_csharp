@@ -60,5 +60,16 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(testId, expectedId);
     }
+    [Fact]
+    public void Test_Find_FindsBandInDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("Modest Mouse");
+      testBand.Save();
+      //Act
+      Band foundBand = Band.Find(testBand.Id);
+      //Assert
+      Assert.Equal(testBand, foundBand);
+    }
   }
 }
