@@ -26,5 +26,14 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Test_Equal_ReturnsTrueForSameInfo()
+    {
+      //Arrange, Act
+      Band firstBand = new Band("Modest Mouse");
+      Band secondBand = new Band("Modest Mouse");
+      //Assert
+      Assert.Equal(firstBand, secondBand);
+    }
   }
 }
