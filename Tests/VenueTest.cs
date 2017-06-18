@@ -83,5 +83,22 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(firstTestVenue, secondTestVenue);
     }
+    [Fact]
+    public void Test_Delete_ReturnsTrueIfListsAreTheSame()
+    {
+      //Arrange
+      Venue firstTestVenue = new Venue("Madison Square Garden", "NYC");
+      firstTestVenue.Save();
+      Venue secondTestVenue = new Venue("Crystal Ballroom", "Portland, OR");
+      secondTestVenue.Save();
+      Venue thirdTestVenue = new Venue("Someone's Basement", "Anytown, USA");
+      thirdTestVenue.Save();
+      List<Venue> expectedList = new List<Venue>{firstTestVenue, secondTestVenue};
+      //Act
+      thirdTestVenue.Delete();
+      List<Venue> resultList = Venue.GetAll();
+      //Assert
+      Assert.Equal(resultList, expectedList);
+    }
   }
 }
