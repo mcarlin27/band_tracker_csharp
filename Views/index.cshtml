@@ -6,7 +6,7 @@
   <div class="col-md-6">
     @foreach(var band in @Model["listBands"])
     {
-      <h3>@band.Name</h3>
+      <h3><a href="/bands/@band.Id">@band.Name</a></h3>
     }
     @if(@Model["show-info"] == "new-band-info")
     {
@@ -15,13 +15,19 @@
     <form  action="/bands/new" method="get">
       <button type="submit" name="button">Add Band</button>
     </form>
-
   </div>
 
   <div class="col-md-6">
     @foreach(var venue in @Model["listVenues"])
     {
-      <h3>@venue.Name, @venue.City</h3>
+      <h3><a href="/venues/@venue.Id">@venue.Name, @venue.City</a></h3>
     }
+    @if(@Model["show-info"] == "new-venue-info")
+    {
+      <h3>You just added @Model["newVenue"].Name!</h3>
+    }
+    <form  action="/venues/new" method="get">
+      <button type="submit" name="button">Add Venue</button>
+    </form>
   </div>
 </div>
