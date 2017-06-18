@@ -1,0 +1,14 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<form action='/venues/@Model["venues"].Id/bands/new' method="post">
+  <label>Add a band to @Model["venue"].Name:</label>
+  <select name="add-band" class="form-control">
+    @foreach(var band in @Model["listBands"])
+    {
+      <option value="@band.Id">@band.Name</option>
+    }
+  </select>
+<button type="submit">Add Band!</button>
+</form>

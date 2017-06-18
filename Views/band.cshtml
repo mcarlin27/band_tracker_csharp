@@ -24,4 +24,7 @@ else
 <form action='/band/@Model["band"].Id/delete' method="get">
     <input type="hidden" name="band-delete" id="band-delete" value="band-delete"><button type="submit">Delete this Band</button>
 </form>
+<form action='/bands/@Model["band"].Id/venues/new' method="get">
+    <input type="hidden" name="add-venue" id="add-venue" value="add-venue"><button type="submit">Add a venue to this Band</button>
+</form>
 <p><a href="/">Return Home</a></p>
