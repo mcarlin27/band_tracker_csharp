@@ -61,6 +61,42 @@ namespace BandTracker.Objects
         model.Add("bands", venueBands);
         return View["venue.cshtml", model];
       }; //retrieves individual venue pages
+
+      Get["/band/{id}/edit"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Band selectedBand = Band.Find(parameters.id);
+        string bandEdit = Request.Query["band-edit"];
+        model.Add("form-type", bandEdit);
+        model.Add("band", selectedBand);
+        return View["edit.cshtml", model];
+      }; //edit individual band
+      Patch["/band/{id}/edit"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Band selectedBand = Band.Find(parameters.id);
+        selectedBand.UpdateBand(Request.Form["band-name"]);
+        List<Venue> bandVenues = selectedBand.GetVenues();
+        model.Add("band", selectedBand);
+        model.Add("venues", bandVenues);
+        return View["band.cshtml", model];
+      }; //returns edited band page
+      Get["band/{id}/delete"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Band selectedBand = Band.Find(parameters.id);
+        string bandDelete = Request.Query["band-delete"];
+        model.Add("form-type", bandDelete);
+        model.Add("band", selectedBand);
+        return View["delete.cshtml", model];
+      }; //delete individual band
+      Delete["band/{id}/delete"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Band selectedBand = Band.Find(parameters.id);
+        selectedBand.Delete();
+        model.Add("listBands", Band.GetAll());
+        model.Add("listVenues", Venue.GetAll());
+        model.Add("show-info", null);
+        return View["index.cshtml", model];
+      }; //returns confirmation of deleted band
+
       Get["/venue/{id}/edit"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         Venue selectedVenue = Venue.Find(parameters.id);
