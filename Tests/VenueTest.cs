@@ -100,20 +100,20 @@ namespace BandTracker.Objects
       //Assert
       Assert.Equal(resultList, expectedList);
     }
-    // [Fact]
-    // public void Test_AddBand_AddBandToVenue()
-    // {
-    //   //Arrange
-    //   Band newBand = new Band("Modest Mouse");
-    //   newBand.Save();
-    //   Venue testVenue = new Venue("Madison Square Garden", "NYC");
-    //   testVenue.Save();
-    //   //Act
-    //   testVenue.AddBand(newBand);
-    //   List<Band> testVenueBands = testVenue.GetBands();
-    //   List<Band> expectedList = new List<Band>{newBand};
-    //   //Assert
-    //   Assert.Equal(expectedList, testVenueBands);
-    // }
+    [Fact]
+    public void Test_AddBand_AddBandToVenue()
+    {
+      //Arrange
+      Band newBand = new Band("Modest Mouse");
+      newBand.Save();
+      Venue testVenue = new Venue("Madison Square Garden", "NYC");
+      testVenue.Save();
+      //Act
+      testVenue.AddBand(newBand);
+      List<Band> testVenueBands = testVenue.GetBands();
+      List<Band> expectedList = new List<Band>{newBand};
+      //Assert
+      Assert.Equal(expectedList, testVenueBands);
+    }
   }
 }
