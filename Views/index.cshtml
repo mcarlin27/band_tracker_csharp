@@ -1,0 +1,19 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<div class="row">
+  <div class="col-md-6">
+    @foreach(var band in @Model["listBands"])
+    {
+      <h3>@band.Name</h3>
+    }
+  </div>
+
+  <div class="col-md-6">
+    @foreach(var venue in @Model["listVenues"])
+    {
+      <h3>@venue.Name, @venue.City</h3>
+    }
+  </div>
+</div>
