@@ -16,13 +16,13 @@ namespace BandTracker.Objects
     }
     public void Dispose()
     {
-      Venue.DeleteAll();
+      Band.DeleteAll();
     }
     [Fact]
-    public void Test_VenueDatabaseEmptyAtFirst()
+    public void Test_BandDatabaseEmptyAtFirst()
     {
       //Arrange, Act
-      int result = Venue.GetAll().Count;
+      int result = Band.GetAll().Count;
       //Assert
       Assert.Equal(0, result);
     }
@@ -34,6 +34,31 @@ namespace BandTracker.Objects
       Band secondBand = new Band("Modest Mouse");
       //Assert
       Assert.Equal(firstBand, secondBand);
+    }
+    [Fact]
+    public void Test_Save_SavesBandToDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("Modest Mouse");
+      testBand.Save();
+      //Act
+      List<Band> result = Band.GetAll();
+      List<Band> expectedResult = new List<Band>{testBand};
+      //Assert
+      Assert.Equal(result, expectedResult);
+    }
+    [Fact]
+    public void Test_Save_AssignsIdToBandInDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("MOdest Mouse");
+      testBand.Save();
+      //Act
+      Band savedBand = Band.GetAll()[0];
+      int testId = testBand.Id;
+      int expectedId = savedBand.Id;
+      //Assert
+      Assert.Equal(testId, expectedId);
     }
   }
 }
