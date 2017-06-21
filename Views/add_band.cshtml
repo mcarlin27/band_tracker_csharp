@@ -2,13 +2,23 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<form action='/venues/@Model["venues"].Id/bands/new' method="post">
-  <label>Add a band to @Model["venue"].Name:</label>
-  <select name="add-band" class="form-control">
-    @foreach(var band in @Model["listBands"])
+    @if (@Model["listBands"].Count == 0)
     {
-      <option value="@band.Id">@band.Name</option>
+      <p>No bands have been added yet!</p>
+      <form  action="/bands/new" method="get">
+        <button type="submit" name="button">Add Band</button>
+      </form>
     }
-  </select>
-<button type="submit">Add Band!</button>
-</form>
+  else
+  {
+    <form action='/venues/@Model["venue"].Id/bands/new' method="post">
+    <label>Add a band to @Model["venue"].Name:</label>
+    <select name="add-band" class="form-control">
+      @foreach(var band in @Model["listBands"])
+      {
+        <option value="@band.Id">@band.Name</option>
+      }
+    </select>
+    <button type="submit">Add Band!</button>
+  </form>
+  }

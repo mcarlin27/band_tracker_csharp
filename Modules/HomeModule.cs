@@ -129,19 +129,13 @@ namespace BandTracker.Objects
         model.Add("show-info", null);
         return View["index.cshtml", model];
       }; //returns confirmation of deleted venue
-
-
-
       Get["/venues/{id}/bands/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         Venue selectedVenue = Venue.Find(parameters.id);
-        model.Add("form-type", "new-band");
         model.Add("venue", selectedVenue);
-        model.Add("venueBands", selectedVenue.GetBands());
         model.Add("listBands", Band.GetAll());
         return View["add_band.cshtml", model];
       }; //navigates to form to add band to venue
-
       Post["/venues/{id}/bands/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         Venue selectedVenue = Venue.Find(parameters.id);
@@ -151,17 +145,13 @@ namespace BandTracker.Objects
         model.Add("bands", selectedVenue.GetBands());
         return View["venue.cshtml", model];
       }; //posts from form adding band to venue
-
       Get["/bands/{id}/venues/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         Band selectedBand = Band.Find(parameters.id);
-        model.Add("form-type", "new-venue");
         model.Add("band", selectedBand);
-        model.Add("bandVenues", selectedBand.GetVenues());
         model.Add("listVenues", Venue.GetAll());
         return View["add_venue.cshtml", model];
       }; //navigates to form to add venue to band
-
       Post["/bands/{id}/venues/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>{};
         Band selectedBand = Band.Find(parameters.id);
