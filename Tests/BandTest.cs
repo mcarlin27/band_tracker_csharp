@@ -17,6 +17,7 @@ namespace BandTracker.Objects
     public void Dispose()
     {
       Band.DeleteAll();
+      Venue.DeleteAll();
     }
     [Fact]
     public void Test_BandDatabaseEmptyAtFirst()
