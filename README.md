@@ -33,7 +33,7 @@ A website created with C# and HTML where a user can add or view the bands which 
 2. Install the [Nancy](http://nancyfx.org/) framework to use the view engine. Follow the link for installation instructions.
 3. Clone this repository.
 4. Open the command line--I use PowerShell.
-5. In SQLCMD: > CREATE DATABASE band_tracker; > GO > USE band_tracker; > GO > CREATE TABLE venues (id INT IDENTITY(1,1), name VARCHAR(255); > CREATE TABLE bands (id INT IDENTITY(1,1), name VARCHAR(255)); > CREATE TABLE bands_venues (id INT IDENTITY(1,1), band_id INT); venue_id INT; > GO
+5. In SQLCMD: > CREATE DATABASE band_tracker; > GO > USE band_tracker; > GO > CREATE TABLE venues (id INT IDENTITY(1,1), name VARCHAR(255), city VARCHAR(255)); > CREATE TABLE bands (id INT IDENTITY(1,1), name VARCHAR(255)); > CREATE TABLE bands_venues (id INT IDENTITY(1,1), band_id INT, venue_id INT); > GO. Back up and restore this database to a test database to run tests.
 6. Navigate into the repository. Use the command "dnx kestrel" to start the server.
 7. On your browser, navigate to "localhost:5004" and enjoy!
 
